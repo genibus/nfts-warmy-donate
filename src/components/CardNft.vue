@@ -144,8 +144,8 @@ export default {
     }
   },
   computed: {
-    baseUrl () { return process.env.BASE_URL },
-    collectionID () { return process.env.COLLECTION_ID },
+    baseUrl () { return 'https://warmy-donation.herokuapp.com/' },
+    collectionID () { return 'WARMY-cc922b' },
     elrondNetworkUrl () { return 'https://devnet-wallet.elrond.com/hook/transaction?' },
     elrondGatewayUrl () { return 'https://devnet-gateway.elrond.com'},
     pictureUrl () { return 'https://gateway.pinata.cloud/ipfs/QmabVoLKYGt3oPYc7zdoPscd2UZRWG7cg1GfTxPK9AUpVm' },
