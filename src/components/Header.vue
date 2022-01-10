@@ -11,7 +11,7 @@
             </p>
             <ul>
               <li>
-                The <span class="text-bold">Maiar</span> are a class of beings. As an example <span class="text-bold">Sauron</span>  is a Maiar.
+                The <span class="text-bold">Maiar</span> are a class of beings. As an example <span class="text-bold">Sauron</span>  is a Maia.
               </li>
               <li>
                 Elrond is the half-elven, Lord of <span class="text-bold">Rivendell</span>.
