@@ -9,7 +9,9 @@
           <p>To thank you for your support, we want to gift you a unique NFT for every 0.05 EGLD donation (approximately 10$).</p>
           <p>The goal is to help him with expenses he is having in this difficult moment. We thank you from the bottom of our heart.</p>
         </div>
-        <div class="q-ml-auto col-md-5 q-pt-md-md self-center">
+        <div class="q-ml-auto col-md-5 self-center">
+          <p class="text-h5 q-mb-none section-header text-underlined"></p>
+          <p class="text-bold q-mt-none q-mt-xl q-mb-md"></p>
         <p>Any donation is very much appreciated. However, if you donate at least 0.05 EGLD, you will receive automatically one NFT.</p>
         <p class="bg-yellow">Now, if you wish to purchase several NFTs we advise you to donate n times 0.05 EGLD, n being the number of NFTs you want.</p>
         <p>There are no royalties, so if you want to sell the NFT you will receive the full amount of the sale (minus the marketplace fee).</p>
