@@ -93,6 +93,11 @@ export default {
       return this.displayNotify('positive', message, window.history.replaceState(null, document.title, this.baseUrl))
     },
 
+    warningNotify () {
+      const message = 'The field cannot be empty or equal to 0, please enter a valid amount.'
+      return this.displayNotify('warning', message)
+    },
+
     negativeNotify () {
       const message = 'We\'re sorry seems like the transaction has failed, please try again...'
       return this.displayNotify('negative', message, window.history.replaceState(null, document.title, this.baseUrl))
@@ -136,6 +141,7 @@ export default {
     },
 
     donate ()  {
+      if (equals(this.donatedAmount, 0)) { return this.warningNotify() }
       if (this.donatedAmount >= 0.01) {
         this.fundToGive = this.donatedAmount * Math.pow(10, 18)
         const url = `${this.elrondNetworkUrl}receiver=${this.smartContractAddress}&value=${this.fundToGive}&gasLimit=${this.transactionGasLimit}&data=${this.transactionData}&callbackUrl=${this.baseUrl}`
