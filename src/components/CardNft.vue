@@ -34,7 +34,7 @@
           label="MAKE A DONATION"
           class="text-bold self-start col-md-6 q-md-mt-auto q-my-mb-none q-md-ml-auto q-mx-auto"
           outline
-          size="1.1rem"
+          size="1rem"
           padding="sm"
           color="primary"
           @click="donate"
