@@ -1,0 +1,39 @@
+h3, h4, span { line-height: 1.5em; }
+
+.container {
+  padding: 0 8%;
+  @media screen and (max-width: $breakpoint-sm-max) { padding: 0 3%; }
+}
+
+.q-focus-helper{ background: white !important; }
+
+.text-underlined {
+  text-underline-offset: 1rem;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-color: $primary;
+  text-decoration-thickness: 3px;
+}
+
+.logo { height: 6em }
+
+.card-section__image {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
+  max-height: 400px;
+  cursor: pointer;
+}
+
+.section-header__text { font-size: 1rem; }
+
+#section-explanation { background-color: rgba(218, 223, 243, .2); }
+
+// .navbar-menu__items {
+//   font-weight: 600;
+//   font-size: 3.5em;
+//   @media screen and (max-width: $breakpoint-sm-max) {
+//     font-size: 2rem;
+//   }
+// }
