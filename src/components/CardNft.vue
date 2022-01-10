@@ -142,7 +142,7 @@ export default {
 
     donate ()  {
       if (equals(this.donatedAmount, 0)) { return this.warningNotify() }
-      if (this.donatedAmount >= 0.01) {
+      if (this.donatedAmount >= 0.0001) {
         this.fundToGive = this.donatedAmount * Math.pow(10, 18)
         const url = `${this.elrondNetworkUrl}receiver=${this.smartContractAddress}&value=${this.fundToGive}&gasLimit=${this.transactionGasLimit}&data=${this.transactionData}&callbackUrl=${this.baseUrl}`
         location.assign(url)
@@ -151,11 +151,11 @@ export default {
   },
   computed: {
     baseUrl () { return 'https://warmy-donation.herokuapp.com/' },
-    collectionID () { return 'WARMY-cc922b' },
-    elrondNetworkUrl () { return 'https://devnet-wallet.elrond.com/hook/transaction?' },
-    elrondGatewayUrl () { return 'https://devnet-gateway.elrond.com'},
-    pictureUrl () { return 'https://gateway.pinata.cloud/ipfs/QmabVoLKYGt3oPYc7zdoPscd2UZRWG7cg1GfTxPK9AUpVm' },
-    smartContractAddress () { return 'erd1qqqqqqqqqqqqqpgqm53mx5e80gdejk456rk83wuz2mrz04p3kewqdzd4mc' },
+    collectionID () { return 'WARMY-111ba7' },
+    elrondNetworkUrl () { return 'https://wallet.elrond.com/hook/transaction?' },
+    elrondGatewayUrl () { return 'https://gateway.elrond.com'},
+    pictureUrl () { return 'https://ipfs.io/ipfs/QmaTjALTzsFgDFUs9Wy8PhFVUZ7ARbm2pPVEQkQmHiLJDm' },
+    smartContractAddress () { return 'erd1qqqqqqqqqqqqqpgqdq0arumjsvfxuvx4lvmprq6yh449vgfjq6nq96kat3' },
     transactionGasLimit () { return 250000000 }
   },
   async created () {
