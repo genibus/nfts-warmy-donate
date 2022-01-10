@@ -149,7 +149,7 @@ export default {
     collectionID () { return 'WARMY-cc922b' },
     elrondNetworkUrl () { return 'https://devnet-wallet.elrond.com/hook/transaction?' },
     elrondGatewayUrl () { return 'https://devnet-gateway.elrond.com'},
-    pictureUrl () { return 'https://ipfs.io/ipfs/QmaTjALTzsFgDFUs9Wy8PhFVUZ7ARbm2pPVEQkQmHiLJDm' },
+    pictureUrl () { return 'https://gateway.pinata.cloud/ipfs/QmabVoLKYGt3oPYc7zdoPscd2UZRWG7cg1GfTxPK9AUpVm' },
     smartContractAddress () { return 'erd1qqqqqqqqqqqqqpgqm53mx5e80gdejk456rk83wuz2mrz04p3kewqdzd4mc' },
     transactionGasLimit () { return 250000000 }
   },
