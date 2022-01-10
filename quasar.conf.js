@@ -10,6 +10,7 @@
 const ESLintPlugin = require('eslint-webpack-plugin')
 const { configure } = require('quasar/wrappers');
 const path = require('path')
+const envparser = require('./envparser')
 
 module.exports = configure(function (ctx) {
   return {
@@ -46,7 +47,15 @@ module.exports = configure(function (ctx) {
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
       vueRouterMode: 'history', // available values: 'hash', 'history'
-      env: require('dotenv').config().parsed,
+      env: {
+        VUE_APP_COLLECTION_ID: process.env.COLLECTION_ID,
+        VUE_APP_GAS_FEE: process.env.GAS_FEE,
+        VUE_APP_NFT_PICTURE_URL: process.env.NFT_PICTURE_URL,
+        VUE_APP_SMART_CONTRACT_ADDRESS: process.env.SMART_CONTRACT_ADDRESS,
+        VUE_APP_ELROND_NETWORK: process.env.ELROND_NETWORK,
+        VUE_APP_ELROND_GATEWAY: process.env.ELROND_GATEWAY,
+        VUE_APP_BASE_URL: process.env.BASE_URL
+      },
         // NETWORK_ELROND: ctx.dev ? process.env.ELROND_DEVNET_URL : process.env.ELROND_MAINNET_URL,
         // GATEWAY_ELROND: ctx.dev ? process.env.ELROND_DEVNET_URL_GATEWAY : process.env.ELROND_MAINNET_URL_GATEWAY
       // transpile: false,
