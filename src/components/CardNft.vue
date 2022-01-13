@@ -175,7 +175,7 @@ export default {
       const { address } = pick(['address'],this.$router.currentRoute.value.query)
       return !isNil(address)
     },
-    baseUrl () { return 'http://localhost:8080/' },
+    baseUrl () { return 'https://warmy-donation.herokuapp.com/' },
     collectionID () { return 'WARMY-111ba7' },
     elrondNetworkUrl () { return 'https://wallet.elrond.com/hook/' },
     elrondGatewayUrl () { return 'https://gateway.elrond.com'},
