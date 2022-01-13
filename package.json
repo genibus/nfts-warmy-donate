@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "make a donation and receive a nft, from all our hearts, thank you.",
   "productName": "Warmy donation",
-  "author": "Thomas Barreau <thomas.barreau@laptitefabric.com>",
+  "author": "Genibus | Pilu",
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue ./",
