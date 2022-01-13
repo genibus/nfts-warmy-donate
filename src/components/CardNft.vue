@@ -20,7 +20,8 @@
         <q-linear-progress :value="progress" class="q-mt-md" />
         <div class="q-mb-md text-grey">{{amount}}/{{divider}}</div>
         <div class="row items-end">
-          <q-input
+          <template v-if="walletIsConnected">
+            <q-input
             v-model="donatedAmount"
             class="q-mx-auto q-gutter-md-md col-12 col-md-6 q-mb-md q-mb-md-none"
             placeholder="Amount in EGLD"
@@ -30,15 +31,27 @@
             dense
             bg-color="white"
             />
-          <q-btn
-          label="MAKE A DONATION"
-          class="text-bold self-start col-md-6 q-md-mt-auto q-my-mb-none q-md-ml-auto q-mx-auto"
-          outline
-          size="1rem"
-          padding="sm"
-          color="primary"
-          @click="donate"
-          />
+            <q-btn
+            label="make a donation"
+            class="text-bold self-start col-md-6 q-md-mt-auto q-my-mb-none q-md-ml-auto q-mx-auto"
+            outline
+            size="1rem"
+            padding="sm"
+            color="primary"
+            @click="donate"
+            />
+          </template>
+          <template v-else>
+            <q-btn
+            label="connect my wallet"
+            class="text-bold self-start col col-md-6 q-md-mt-auto q-my-mb-none q-md-ml-auto q-mx-auto"
+            outline
+            size="1rem"
+            padding="sm"
+            color="primary"
+            @click="connectWallet"
+            />
+          </template>
         </div>
       </q-card-section>
     </q-card>
@@ -55,7 +68,7 @@
 </template>
 
 <script>
-import { isNil, equals } from 'rambda'
+import { isNil, equals, pick } from 'rambda'
 import { LocalStorage } from 'quasar'
 import axios from 'axios'
 export default {
@@ -73,12 +86,14 @@ export default {
     }
   },
   methods: {
-    deleteFromLocalStorage (key) {
+    removeFromLocalStorage (key) {
       return LocalStorage.remove(key)
     },
+
     getProgress (divider, balance) {
       return (divider - balance) / 1000
     },
+
     async getNFTData () {
       try {
         const { data } = await axios.get(`${this.elrondGatewayUrl}/address/${this.smartContractAddress}/nft/${this.collectionID}/nonce/1`)
@@ -88,6 +103,12 @@ export default {
       }
       return window.history.replaceState(null, document.title, this.baseUrl)
     },
+
+    connectWallet () {
+      const url = `${this.elrondNetworkUrl}login?callbackUrl=${this.baseUrl}`
+      location.assign(url)
+    },
+
     positiveNotify () {
       const message = 'Your transaction has been successfully completed. <br> Many thanks from the bottom of our heart ❤️'
       return this.displayNotify('positive', message, window.history.replaceState(null, document.title, this.baseUrl))
@@ -127,7 +148,7 @@ export default {
         return
       } else {
         if (LocalStorage.has('txHash')) {
-          return this.deleteFromLocalStorage('txHash')
+          return this.removeFromLocalStorage('txHash')
         } else {
           if (params.status) {
             LocalStorage.set('txHash', params.txHash)
@@ -144,15 +165,19 @@ export default {
       if (equals(this.donatedAmount, 0)) { return this.warningNotify() }
       if (this.donatedAmount >= 0.0001) {
         this.fundToGive = this.donatedAmount * Math.pow(10, 18)
-        const url = `${this.elrondNetworkUrl}receiver=${this.smartContractAddress}&value=${this.fundToGive}&gasLimit=${this.transactionGasLimit}&data=${this.transactionData}&callbackUrl=${this.baseUrl}`
+        const url = `${this.elrondNetworkUrl}transaction?receiver=${this.smartContractAddress}&value=${this.fundToGive}&gasLimit=${this.transactionGasLimit}&data=${this.transactionData}&callbackUrl=${this.baseUrl}`
         location.assign(url)
       }
     }
   },
   computed: {
-    baseUrl () { return 'https://warmy-donation.herokuapp.com/' },
+    walletIsConnected () {
+      const { address } = pick(['address'],this.$router.currentRoute.value.query)
+      return !isNil(address)
+    },
+    baseUrl () { return 'http://localhost:8080/' },
     collectionID () { return 'WARMY-111ba7' },
-    elrondNetworkUrl () { return 'https://wallet.elrond.com/hook/transaction?' },
+    elrondNetworkUrl () { return 'https://wallet.elrond.com/hook/' },
     elrondGatewayUrl () { return 'https://gateway.elrond.com'},
     pictureUrl () { return 'https://ipfs.io/ipfs/QmaTjALTzsFgDFUs9Wy8PhFVUZ7ARbm2pPVEQkQmHiLJDm' },
     smartContractAddress () { return 'erd1qqqqqqqqqqqqqpgqdq0arumjsvfxuvx4lvmprq6yh449vgfjq6nq96kat3' },
@@ -160,7 +185,7 @@ export default {
   },
   async created () {
     try {
-      this.deleteFromLocalStorage('txHash')
+      this.removeFromLocalStorage('txHash')
       await this.getRouteParams()
       this.NFTData = await this.getNFTData()
       this.amountRaised = await this.getAmountRaised()
@@ -176,7 +201,7 @@ export default {
   },
 
   beforeRouteLeave(to, from) {
-    this.deleteFromLocalStorage('txHash')
+    this.removeFromLocalStorage('txHash')
   }
 }
 </script>
